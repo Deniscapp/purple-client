@@ -4,17 +4,16 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
 import SnackbarContext from './SnackbarContext';
-
 export interface IShowSnackbarState {
   message: string | null;
   position?: {
-    horizontal: 'left' | 'center' | 'right',
-    vertical: 'top' | 'bottom'
+    horizontal: 'left' | 'center' | 'right';
+    vertical: 'top' | 'bottom';
   };
 }
 
 interface ISnackbarProvider {
-    children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[];
 }
 
 const initialState: IShowSnackbarState = {
@@ -22,9 +21,7 @@ const initialState: IShowSnackbarState = {
   position: { horizontal: 'center', vertical: 'top' },
 };
 
-const SnackbarProvider = ({
-  children,
-}: ISnackbarProvider) => {
+const SnackbarProvider = ({ children }: ISnackbarProvider) => {
   const [state, setState] = useState<IShowSnackbarState>(initialState);
   const [isOpen, setOpen] = useState(false);
 
@@ -33,7 +30,7 @@ const SnackbarProvider = ({
     setOpen(true);
   };
 
-  const onClose = (_event: object, reason: string) => {
+  const onClose = (_event: Record<string, unknown>, reason: string) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -54,11 +51,15 @@ const SnackbarProvider = ({
         open={isOpen}
         onClose={onClose}
         key={state.message}
-        action={(
-          <IconButton size="small" color="inherit" onClick={e => onClose(e, 'close')}>
+        action={
+          <IconButton
+            size="small"
+            color="inherit"
+            onClick={(e) => onClose(e, 'close')}
+          >
             <CloseIcon fontSize="small" />
           </IconButton>
-          )}
+        }
         {...state}
       />
       {children}

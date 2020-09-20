@@ -17,8 +17,7 @@ const Root = styled.div`
   > div {
     margin: 10px 0;
   }
-  
-`
+`;
 
 function App() {
   return (
