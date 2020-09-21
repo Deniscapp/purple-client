@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { useMutation } from '@apollo/react-hooks';
 import { Card, CardContent, TextField } from '@material-ui/core';
 import gql from 'graphql-tag';
 
@@ -12,39 +11,19 @@ import {
   ConvertionWrapper,
   StyledTypography,
 } from './styledComponents';
+import StatisticsQuery from '../queries/StatisticsQuery';
 
-const NEW_CONVERSION = gql`
-  mutation NewConversion($newConversion: NewConversionInput!) {
-    newConversion(input: $newConversion) {
-      _id
-      value
-      originCurrency
-      targetCurrency
-      result
-      createdAt
-    }
-  }
-`;
+import { useNewConversionMutation, CurrencyType } from '../gen-types';
 
-const STATISTICS_QUERY = gql`
-  query CurrentStatistics {
-    currentStats {
-      mostPolularCurrency
-      totalConverted
-      totalConversions
-    }
-  }
-`;
-
-const ConversionCard = () => {
+const ConversionCard = (): JSX.Element => {
   const { showSnackbar } = useContext(SnarbackContext);
-  const [createConversion, { data, loading }] = useMutation(NEW_CONVERSION, {
-    update(cache, { data: { newConversion } }) {
+  const [createConversion, { data, loading }] = useNewConversionMutation({
+    update(cache, { data }) {
       cache.modify({
         fields: {
           conversions(existingConversions = []) {
             const newConversionRef = cache.writeFragment({
-              data: newConversion,
+              data: data?.newConversion,
               fragment: gql`
                 fragment NewConversion on Conversion {
                   id
@@ -56,7 +35,7 @@ const ConversionCard = () => {
         },
       });
     },
-    refetchQueries: [{ query: STATISTICS_QUERY }],
+    refetchQueries: [{ query: StatisticsQuery }],
     onCompleted() {
       return showSnackbar({
         message: 'Convertion completed! ✅',
@@ -69,12 +48,16 @@ const ConversionCard = () => {
     },
   });
   const [value, setValue] = useState(1);
-  const [originCurrency, setOriginCurrency] = useState('');
-  const [targetCurrency, setTargetCurrency] = useState('');
+  const [originCurrency, setOriginCurrency] = useState<CurrencyType>(
+    CurrencyType.Czk
+  );
+  const [targetCurrency, setTargetCurrency] = useState<CurrencyType>(
+    CurrencyType.Eur
+  );
 
   const result = `${new Intl.NumberFormat('en-IN', {
     maximumSignificantDigits: 3,
-  }).format(data?.newConversion?.result)} ${targetCurrency}`;
+  }).format(data?.newConversion?.result ?? 0)} ${targetCurrency}`;
 
   const areInputsFilled = !value || !originCurrency || !targetCurrency;
 
