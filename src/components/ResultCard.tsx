@@ -19,7 +19,7 @@ interface IResultCard {
   loading?: boolean;
 }
 
-const ResultCard = ({ value, title, loading }: IResultCard) => {
+const ResultCard = ({ value, title, loading }: IResultCard): JSX.Element => {
   const formatValue = (value: number | string) => {
     if (typeof value === 'number')
       return new Intl.NumberFormat('en-IN', {

@@ -19,7 +19,7 @@ const Root = styled.div`
   }
 `;
 
-function App() {
+function App(): JSX.Element {
   return (
     <Root>
       <ConversionCard />
