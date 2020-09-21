@@ -1,10 +1,10 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import styled from 'styled-components';
 
 import ResultCard from './ResultCard';
 import { StyledTypography } from './styledComponents';
+
+import { useStatisticsQueryQuery } from '../gen-types';
 
 const Grid = styled.div`
   display: grid;
@@ -14,17 +14,8 @@ const Grid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 `;
 
-const STATISTICS_QUERY = gql`
-  query CurrentStatistics {
-    currentStats {
-      mostPolularCurrency
-      totalConverted
-      totalConversions
-    }
-  }
-`;
-const Statistics = () => {
-  const { data, loading } = useQuery(STATISTICS_QUERY);
+const Statistics = (): JSX.Element => {
+  const { data, loading } = useStatisticsQueryQuery();
   const totalConverted = data?.currentStats.totalConverted
     ? `${new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(
         data?.currentStats.totalConverted
@@ -39,13 +30,13 @@ const Statistics = () => {
         <ResultCard
           key={0}
           loading={loading}
-          value={data?.currentStats.mostPolularCurrency}
+          value={data?.currentStats.mostPolularCurrency ?? 0}
           title="Most Popular Currency"
         />
         <ResultCard
           key={1}
           loading={loading}
-          value={data?.currentStats.totalConversions}
+          value={data?.currentStats.totalConversions ?? 0}
           title="Total of Conversions"
         />
         <ResultCard
