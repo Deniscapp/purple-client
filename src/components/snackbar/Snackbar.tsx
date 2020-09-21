@@ -21,7 +21,7 @@ const initialState: IShowSnackbarState = {
   position: { horizontal: 'center', vertical: 'top' },
 };
 
-const SnackbarProvider = ({ children }: ISnackbarProvider) => {
+const SnackbarProvider = ({ children }: ISnackbarProvider): JSX.Element => {
   const [state, setState] = useState<IShowSnackbarState>(initialState);
   const [isOpen, setOpen] = useState(false);
 
@@ -30,7 +30,8 @@ const SnackbarProvider = ({ children }: ISnackbarProvider) => {
     setOpen(true);
   };
 
-  const onClose = (_event: Record<string, unknown>, reason: string) => {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  const onClose = (_event: object, reason: string) => {
     if (reason === 'clickaway') {
       return;
     }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React from 'react';
 
 interface IShowSnackbarArgs {
@@ -9,8 +10,8 @@ interface IShowSnackbarArgs {
 }
 
 const SnackbarContext = React.createContext({
-  showSnackbar: (_args: IShowSnackbarArgs) => null,
-  closeSnackbar: (_event: Record<string, unknown>, _reason: string) => null,
+  showSnackbar: (_: IShowSnackbarArgs) => {},
+  closeSnackbar: (_: Record<string, unknown>, _reason: string) => {},
 });
 
 export default SnackbarContext;
