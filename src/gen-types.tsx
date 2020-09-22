@@ -226,6 +226,14 @@ export type MutationNewConversionArgs = {
   input: NewConversionInput;
 };
 
+export type AvailableCurrenciesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AvailableCurrenciesQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'currencies'>
+);
+
 export type ConversionListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -262,6 +270,36 @@ export type StatisticsQueryQuery = (
 );
 
 
+export const AvailableCurrenciesDocument = gql`
+    query AvailableCurrencies {
+  currencies
+}
+    `;
+
+/**
+ * __useAvailableCurrenciesQuery__
+ *
+ * To run a query within a React component, call `useAvailableCurrenciesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAvailableCurrenciesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAvailableCurrenciesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAvailableCurrenciesQuery(baseOptions?: Apollo.QueryHookOptions<AvailableCurrenciesQuery, AvailableCurrenciesQueryVariables>) {
+        return Apollo.useQuery<AvailableCurrenciesQuery, AvailableCurrenciesQueryVariables>(AvailableCurrenciesDocument, baseOptions);
+      }
+export function useAvailableCurrenciesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AvailableCurrenciesQuery, AvailableCurrenciesQueryVariables>) {
+          return Apollo.useLazyQuery<AvailableCurrenciesQuery, AvailableCurrenciesQueryVariables>(AvailableCurrenciesDocument, baseOptions);
+        }
+export type AvailableCurrenciesQueryHookResult = ReturnType<typeof useAvailableCurrenciesQuery>;
+export type AvailableCurrenciesLazyQueryHookResult = ReturnType<typeof useAvailableCurrenciesLazyQuery>;
+export type AvailableCurrenciesQueryResult = Apollo.QueryResult<AvailableCurrenciesQuery, AvailableCurrenciesQueryVariables>;
 export const ConversionListDocument = gql`
     query ConversionList {
   conversions {

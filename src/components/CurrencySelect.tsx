@@ -1,20 +1,12 @@
 import React from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import { TextField } from '@material-ui/core';
 
-import { CurrencyType } from '../gen-types';
-
-const CURRENCIES_QUERY = gql`
-  query AvailableCurrencies {
-    currencies
-  }
-`;
+import { CurrencyType, useAvailableCurrenciesQuery } from '../gen-types';
 
 interface ICurrencySelect {
   label?: string;
-  value: string;
+  value: CurrencyType;
   setValue: (value: CurrencyType) => void;
 }
 
@@ -23,7 +15,7 @@ const CurrencySelect = ({
   value,
   setValue,
 }: ICurrencySelect): JSX.Element => {
-  const { data, loading, error } = useQuery(CURRENCIES_QUERY);
+  const { data, loading, error } = useAvailableCurrenciesQuery();
 
   return (
     <Autocomplete
