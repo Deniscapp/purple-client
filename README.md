@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Instruction
 
-All is needed is to run `npm install` and `npm start` :) 
+All is needed is to run `npm install` and `npm start` :) <br/>
 NodeJS version used: 14.5v
 
 ### `npm start`
