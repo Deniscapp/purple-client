@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Instruction
+## Instructions
 
 All is needed is to run `npm install` and `npm start` :) <br/>
 NodeJS version used: 14.5v
