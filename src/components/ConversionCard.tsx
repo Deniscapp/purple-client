@@ -41,9 +41,9 @@ const ConversionCard = (): JSX.Element => {
         message: 'Convertion completed! ✅',
       });
     },
-    onError() {
+    onError(err) {
       return showSnackbar({
-        message: 'Sorry, but something went wrong! 😓',
+        message: err?.message ?? 'Sorry, but something went wrong! 😓',
       });
     },
   });
@@ -57,7 +57,9 @@ const ConversionCard = (): JSX.Element => {
 
   const result = `${new Intl.NumberFormat('en-IN', {
     maximumSignificantDigits: 3,
-  }).format(data?.newConversion?.result ?? 0)} ${targetCurrency}`;
+  }).format(data?.newConversion?.result ?? 0)} ${
+    data?.newConversion?.targetCurrency
+  }`;
 
   const areInputsFilled = !value || !originCurrency || !targetCurrency;
 
