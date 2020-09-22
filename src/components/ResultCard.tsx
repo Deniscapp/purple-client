@@ -1,17 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Card, CardContent, CircularProgress } from '@material-ui/core';
+import { CardContent, CircularProgress } from '@material-ui/core';
 
-const Title = styled.p`
-  color: #542677;
-  font-weight: bold;
-`;
-
-const StyledCard = styled(Card)`
-  && {
-    flex: 1;
-  }
-`;
+import { Title, StyledCard } from './styledComponents';
 
 interface IResultCard {
   value: number | string;

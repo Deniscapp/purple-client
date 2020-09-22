@@ -1,18 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import ResultCard from './ResultCard';
 import { StyledTypography } from './styledComponents';
+import { Grid } from './styledComponents';
 
 import { useStatisticsQueryQuery } from '../gen-types';
-
-const Grid = styled.div`
-  display: grid;
-  grid-column-gap: 15px;
-  grid-row-gap: 15px;
-  width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-`;
 
 const Statistics = (): JSX.Element => {
   const { data, loading } = useStatisticsQueryQuery();

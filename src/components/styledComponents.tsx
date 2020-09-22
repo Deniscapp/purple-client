@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
-import { Typography } from '@material-ui/core';
+import { Typography, Card, Button } from '@material-ui/core';
 
 export const StyledButton = styled(Button)`
   && {
@@ -10,6 +9,25 @@ export const StyledButton = styled(Button)`
     &:hover {
       background-color: #20ceff;
     }
+  }
+`;
+
+export const Grid = styled.div`
+  display: grid;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+`;
+
+export const Title = styled.p`
+  color: #542677;
+  font-weight: bold;
+`;
+
+export const StyledCard = styled(Card)`
+  && {
+    flex: 1;
   }
 `;
 
